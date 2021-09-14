@@ -1,0 +1,69 @@
+
+
+
+@media (max-width:600px){
+    section{
+        overflow: hidden;
+    }
+
+    header{
+        padding: 20px 20px ;
+    }
+
+    header .logo{
+        font-size: 20px;
+    }
+    header ul{
+        display: none;
+    }
+
+    #menu-btn{
+        display: inline-block;
+        color: white;
+        font-size: 25px;
+    }
+
+    .sec{
+        padding: 20px 20px;
+    }
+
+    .sec h2{
+        font-size: 2.5em;
+    }
+
+    .sec-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sec-info p {
+        width: 100%;
+    }
+    
+    .sec-info p span{
+        display: none;
+    }
+    .cuadro-login {
+        margin-top: 40px;
+        width: 330px;
+        margin-right: 0px;
+    }
+
+    #header-list.active {
+        display: block;
+        position: absolute;
+        background-color: grey;
+        width: 91%;
+        top: 56px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background: #1c0522;
+
+
+
+}
