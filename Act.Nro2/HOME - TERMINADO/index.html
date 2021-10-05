@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="WOW-master/WOW-master/css/libs/animate.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+
+    <title>Gaucho Rocket</title>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo animate__animated animate__backInLeft">Gaucho Rocket</a>
+
+        <ul id="header-list" class="animate__animated animate__backInRight">
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="#sec" class="active">Login</a></li>
+        </ul>
+
+        <i class="fas fa-bars" id="menu-btn"></i>
+    </header>
+
+    <section>
+        <img src="recursos/images/stars.png" id="stars">
+        <img src="recursos/images/moon.png" id="moon">
+        <img src="recursos/images/mountains_behind.png" id="mountains_behind">
+        <h2 id="text">GAUCHO ROCKET</h2>
+        <a href="#sec" id="btn">LOGIN</a>
+        <img src="recursos/images/mountains_front.png" id="mountains_front">
+    </section>
+
+
+    <div class="sec" id="sec">
+        <h2 class="wow animate__animated animate__backInLeft" data-wow-duration="1s">Una manera distinta de viajar</h2>
+        <div class="sec-info" data-wow-delay="4s">
+            <p class="wow animate__animated animate__backInLeft">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam repellendus sequi expedita consequuntur ex commodi porro magni nesciunt unde incidunt? Similique, recusandae impedit iste velit repellendus harum vitae culpa nam? Amet consectetur
+                vitae veritatis magni officia obcaecati quia natus nobis, dicta qui debitis facere tempore voluptate illum dignissimos enim? Aliquam illum <br> <br> architecto vel accusamus qui quae,
+
+                <span>
+
+
+                
+                Maxime aspernatur rerum eum, itaque officiis impedit assumenda maiores autem, ad laboriosam, possimus
+                voluptate esse asperiores? Quisquam cumque nihil tenetur. Explicabo illo tempore voluptates sit quasi
+                molestias atque! Omnis, itaque?
+                Quae necessitatibus similique magni. Quas reprehenderit magnam, qui perferendis maxime est reiciendis
+                natus quasi a deleniti omnis officiis, aliquam ut amet. Velit esse quo illo? Esse vel dolorum iusto
+                iure.<br> <br>
+
+                </span> Perferendis suscipit, ipsum recusandae atque doloremque excepturi at. Dicta molestias nemo dignissimos. Quos illo sapiente esse eligendi dolor minus optio eos, temporibus error sequi! Voluptatum non fugit ullam
+                atque quisquam.</p>
+
+
+            <div class="cuadro-login wow animate__animated animate__backInRight">
+                <h3>LOGIN</h3>
+                <form action="archivosPHP/loguear.php" method="post">
+                    <div class="txt-info">
+                        <input type="email" name="email" id="form-email" required>
+                        <span></span>
+                        <label>Username</label>
+                    </div>
+                    <div class="txt-info">
+                        <input type="password" name="password" id="form-password" required>
+                        <span></span>
+                        <label>Password</label>
+                    </div>
+
+                    <div class="pass-olvidada">Olvidaste la contrasena?</div>
+                    <input type="submit" value="LOGIN">
+                    <div class="registrate">No estas registrado? <a href="">REGISTRATE ACA</a> </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="redes-conteiner">
+            <ul>
+                <li class="wow animate__animated animate__backInUp"><a href="https://www.facebook.com/estebannicolas.barone/"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="wow animate__animated animate__backInUp"><a href="https://twitter.com/estebanb30"><i
+                            class="fab fa-twitter"></i></a></li>
+                <li class="wow animate__animated animate__backInUp"><a href="https://www.instagram.com/estebanbarone_/"><i
+                            class="fab fa-instagram"></i></a></li>
+                <li class="wow animate__animated animate__backInUp"><a href="https://github.com/estyCai32"><i
+                            class="fab fa-github"></i></a></li>
+            </ul>
+        </div>
+
+
+        <div class="redes-txt">
+            <p>Sitio Hecho y Desarrollado por Grupo WEB 2</p>
+        </div>
+    </footer>
+
+
+
+    <script src="scripts-efectos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
+    <script src="WOW-master/WOW-master/dist/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+
+</body>
+
+</html>
