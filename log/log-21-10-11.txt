@@ -1,0 +1,7 @@
+[21-10-11 04:38:30][INFO] Se llamo a canciones
+[21-10-11 04:38:32][INFO] Se llamo a canciones
+[21-10-11 04:38:33][INFO] Se llamo a canciones
+[21-10-11 04:44:56][INFO] Se llamo a canciones
+[21-10-11 04:44:58][INFO] Se llamo a canciones
+[21-10-11 04:44:59][INFO] Se llamo a canciones
+[21-10-11 04:45:01][INFO] Se llamo a canciones
