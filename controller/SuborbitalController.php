@@ -18,6 +18,15 @@ class SuborbitalController{
 
     }
 
+    public function showForm(){
+        $data["data"] = array ("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
+        
+        echo $this->printer->render("view/formularioReservaTurno.html", $data);
+
+
+
+    }
+
 
 
 
