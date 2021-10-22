@@ -1,10 +1,39 @@
 {{> headerSession}}
 
-<div class="contenedorRegistro" style="display:flex; justify-content:center; padding:25px;">
+<DIV style="height: 500px;">
 
+   <h1 style="text-align: center;">Bienvenido {{varSession}}</h1>
+    
 
-   <h1>Bienvenido {{varSession}}</h1>
-    
-    
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+   <div class="card" style="width: 20rem; height: auto;">
+    <img src="/TPFINALPW2/public/img/medico.jpg" class="card-img-top" style="width: 20rem; height: 300px;" alt="...">
+    <div class="card-body">
+      <p class="card-text">Es necesario que tengas tu checkeo medico al dia. <a href="#">Click Aqui</a></p>
     </div>
+  </div>
+
+  <div class="card" style="width: 20rem; height: auto;">
+    <img src="/TPFINALPW2/public/img/suborbital.jpg" class="card-img-top" style="width: 20rem; height: 300px;" alt="...">
+    <div class="card-body">
+      <p class="card-text">Si estas comenzando con los viajes especiales, el viaje sub orbital es para vos. <a href="">Click aqui</a> </p>
+    </div>
+  </div>
+
+  <div class="card" style="width: 20rem; height: auto;">
+    <img src="/TPFINALPW2/public/img/orbital.jpg" class="card-img-top" style="width: 20rem; height: 300px;" alt="...">
+    <div class="card-body">
+      <p class="card-text">Si quieres ir un paso mas hacia el cosmos, no dudes en contratar nuestros viajes orbitales <a href="">Click aqui</a>.</p>
+    </div>
+  </div>
+
+  <div class="card" style="width: 20rem; height: auto;">
+    <img src="/TPFINALPW2/public/img/alunizaje.jpg" class="card-img-top" style="width: 20rem; height: 300px;" alt="...">
+    <div class="card-body">
+      <p class="card-text">Estas interesado en los viajes interplanetarios, no dudes en consultarnos <a href="">Click Aqui</a></p>
+    </div>
+  </div>
+</div>
+  
+</DIV>
 {{> footer}}

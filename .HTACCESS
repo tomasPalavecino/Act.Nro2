@@ -5,7 +5,7 @@
 Options -Indexes
 DirectoryIndex index.php
 RewriteEngine On
-RewriteBase /
+RewriteBase /TPFINALPW2
 FallbackResource "index.php"
 #RewriteRule ^ index.php [L,B]
 #o se usa una regla de reescritura o la otra
