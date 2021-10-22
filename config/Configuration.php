@@ -24,28 +24,16 @@ class Configuration{
         require_once("model/LoginModel.php");
         $database = $this->getDatabase();
         return new LoginModel($database);//habiendole pasado una BD.
-    }
-
-    public function createPaginaPrincipalController(){
-        require_once("controller/PaginaPrincipalController.php");
-        return new PaginaPrincipalController( $this->createPrinter());
-    }
-
-    private  function createPaginaPrincipalModel(){
-        require_once("model/PaginaPrincipalModel.php");
-        $database = $this->getDatabase();
-        return new PaginaPrincioalModel($database);
-    }
+    }  
 
     public function createCerrarSesionController(){
         require_once("controller/CerrarSesionController.php");
         return new CerrarSesionController( $this->createPrinter());
     }
 
-    private  function createCerrarSesionModel(){
-        require_once("model/CerrarSesionModel.php");
-        $database = $this->getDatabase();
-        return new CerrarSesionModel($database);
+    public function createSuborbitalController(){
+        require_once("controller/SuborbitalController.php");
+        return new SuborbitalController($this->createPrinter());
     }
   
 
