@@ -33,9 +33,13 @@ class Configuration{
 
     public function createSuborbitalController(){
         require_once("controller/SuborbitalController.php");
-        return new SuborbitalController($this->createPrinter());
+        return new SuborbitalController($this->createSuborbitalModel(),$this->createPrinter());
     }
   
+    public function createSuborbitalModel(){
+        require_once("model/SuborbitalModel.php");
+        return new SuborbitalModel ($this->getDatabase());
+    }
 
     
 

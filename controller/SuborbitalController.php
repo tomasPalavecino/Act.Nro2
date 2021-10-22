@@ -1,16 +1,20 @@
 <?php
 class SuborbitalController{
 
+    private $modelSuborbital;
     private $printer;
     
     //ver luego si requiero un model
-    public function SuborbitalController($printer){
+    public function __construct($modelSuborbital ,$printer){
+        $this->modelSuborbital = $modelSuborbital;
         $this->printer = $printer;
 
     }
 
     public function show(){
-        echo $this->printer->render("view/SuborbitalReserva.html");
+
+        $model["suborbitales"] =  $this->modelSuborbital->listarViajesSuborbitalesDisponibles();
+        echo $this->printer->render("view/SuborbitalReserva.html", $model);
 
     }
 
