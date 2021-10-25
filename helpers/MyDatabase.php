@@ -6,13 +6,11 @@ class MyDataBase{
     public function __construct($servidor, $nombreUsuario, $contrasenia, $nombrebd){//el constructor me establece la conexion
         $this->conection = mysqli_connect($servidor, $nombreUsuario, $contrasenia, $nombrebd);
 
-        if (!$this->conection){
-            die("Connection failed: ".msyqli_connect_error());
-        }
+        
 
     }
     public function agregar($insert){
-        return  mysqli_query($this->conection, $insert, true);
+        return  mysqli_query($this->conection, $insert);
     }
 
     public function query($consulta){//este metodo va hacer las consultas y va a devolver el valor.
@@ -21,8 +19,15 @@ class MyDataBase{
         if (mysqli_num_rows($databaseResult) <= 0)
             return [];
 
-        return mysqli_fetch_ASSOC($databaseResult);
+        return mysqli_fetch_all($databaseResult,MYSQLI_ASSOC);
     }
+
+    public function obtenerPorUsuarioYClave($consulta){
+        $resultado = mysqli_query($this->conection, $consulta);
+        return mysqli_fetch_array($resultado);
+    }
+
+
     }
 
     

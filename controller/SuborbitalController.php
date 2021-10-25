@@ -15,9 +15,10 @@ class SuborbitalController{
 
     public function show(){
         
-
-
+        $varSession = $_SESSION["nombreUsuario"];
         $model["suborbitales"] =  $this->modelSuborbital->listarViajesSuborbitalesDisponibles();
+        $model["nombreSession"] = $varSession;
+
         echo $this->printer->render("view/SuborbitalReserva.html", $model);
 
     }
