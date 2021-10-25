@@ -15,27 +15,36 @@ class SuborbitalController{
 
     public function show(){
         
-        $varSession = $_SESSION["nombreUsuario"];
-        $model["nombreSession"] = $varSession;
-        $model["suborbitales"] =  $this->modelSuborbital->listarViajesSuborbitalesDisponibles();
-
-        echo $this->printer->render("view/SuborbitalReserva.html", $model);
+        if (isset($_SESSION["idUsuario"])){
+            $varSession = $_SESSION["nombreUsuario"];
+            $model["nombreSession"] = $varSession;
+            $model["suborbitales"] =  $this->modelSuborbital->listarViajesSuborbitalesDisponibles();
+            echo $this->printer->render("view/SuborbitalReserva.html", $model);
+        }
+        header ("Location: /TPFINALPW2/Login/show");
 
     }
 
     public function showForm(){
-
-        $varSession = $_SESSION["nombreUsuario"];
-        $model["nombreSession"] = $varSession;
-        $model["data"] = array ("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
-        
-        echo $this->printer->render("view/formularioReservaTurno.html", $model);
+        if (isset($_SESSION["idUsuario"])){
+            $varSession = $_SESSION["nombreUsuario"];
+            $model["nombreSession"] = $varSession;
+            $model["data"] = array ("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
+            
+            echo $this->printer->render("view/formularioReservaTurno.html", $model);
+    
+        }
+        header ("Location: /TPFINALPW2/Login/show");
 
     }
 
     public function enviarEmail(){
+
+
         $idViaje =  $_GET["idViaje"];
         $idUsuario =  $_SESSION["idUsuario"];
+        $_SESSION["NumRandom"] = rand(5000,6000);
+        $nRan= $_SESSION["NumRandom"]; 
         
         $viaje = $this->modelSuborbital->obtenerViajePorId($idViaje);
 
@@ -45,7 +54,7 @@ class SuborbitalController{
         $email_mensaje .= "Direccion: ". $_POST["direccion"]. "\r\n";
         $email_mensaje .= "Con Fecha de Salida: ". $viaje["fechaSalida"]. "\r\n";
         $email_mensaje .= "Con Fecha de Regreso: ". $viaje["fechaRegreso"]. "\r\n";
-        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Suborbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario"; 
+        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Suborbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario&nRan=$nRan"; 
 
     
         // destinatario//
@@ -64,15 +73,22 @@ class SuborbitalController{
     }
 
     public function reservar(){
-        $idViaje = $_GET["idViaje"];
-        $idUsuario = $_GET["idUsuario"];
-        $varSession = $_SESSION["nombreUsuario"];
-        $model["nombreSession"] = $varSession;
-        $this->modelSuborbital->reservarViaje($idViaje, $idUsuario);
 
+        if ($_SESSION["NumRandom"] == $_GET["nRan"]){
+            $idViaje = $_GET["idViaje"];
+            $idUsuario = $_GET["idUsuario"];
+            $varSession = $_SESSION["nombreUsuario"];
+            $model["nombreSession"] = $varSession;
+            $this->modelSuborbital->reservarViaje($idViaje, $idUsuario);
+    
+    
+            echo $this->printer->render("view/reservaExitosa.html" ,$model);
+    
+        }else {
+            echo"Ups ha ocurrido un error"; 
 
-        echo $this->printer->render("view/reservaExitosa.html" ,$model);
-
+        }
+ 
 
     }
 
@@ -85,7 +101,3 @@ class SuborbitalController{
 
     
 }
-
-
-
-?>
