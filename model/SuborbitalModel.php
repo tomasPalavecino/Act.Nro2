@@ -18,6 +18,19 @@ class SuborbitalModel{
         return $resultado;
     }
 
+    public function obtenerViajePorId($idViaje){
+        $consulta = "SELECT * from viaje where idViaje like ".$idViaje."";
+        $viaje = $this->database->obtenerArrayRegistro($consulta);
+        return $viaje;
+    }
+
+
+
+    public function reservarViaje($idViaje, $idUsuario){
+        $insert = "INSERT into reserva (idViaje, idUsuario) values ('" . $idViaje . "', '" . $idUsuario . "')"; 
+        $this->database->agregar($insert);
+    }
+
 
 }
 

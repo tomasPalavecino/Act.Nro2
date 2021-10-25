@@ -22,7 +22,7 @@ class MyDataBase{
         return mysqli_fetch_all($databaseResult,MYSQLI_ASSOC);
     }
 
-    public function obtenerPorUsuarioYClave($consulta){
+    public function obtenerArrayRegistro($consulta){
         $resultado = mysqli_query($this->conection, $consulta);
         return mysqli_fetch_array($resultado);
     }

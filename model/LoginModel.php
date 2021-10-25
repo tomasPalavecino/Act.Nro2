@@ -67,7 +67,7 @@ class LoginModel
         $consulta =  "SELECT * FROM Usuario WHERE nombreDeUsuario= '" . $nombreUsuario .
         "'AND contrasenia= '"
         . $clave ."'";
-        $usuario = $this->database->obtenerPorUsuarioYClave($consulta);
+        $usuario = $this->database->obtenerArrayRegistro($consulta);
         return $usuario;
     }
 }
