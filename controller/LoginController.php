@@ -18,7 +18,7 @@ class LoginController{
 
     function loguearse(){
         if (isset($_POST["NombreUsuario"]) == true && isset($_POST["clave"]) == true){
-                   $model = $this->loginModel->Loguearse($_POST["NombreUsuario"], $_POST["clave"]);
+            $model = $this->loginModel->Loguearse($_POST["NombreUsuario"], $_POST["clave"]);
 
        if ($model["tipo"] == 0){
         echo $this->printer->render("view/Principal.html", $model);

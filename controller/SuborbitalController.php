@@ -1,4 +1,6 @@
 <?php
+  
+
 class SuborbitalController{
 
     private $modelSuborbital;
@@ -12,6 +14,8 @@ class SuborbitalController{
     }
 
     public function show(){
+        
+
 
         $model["suborbitales"] =  $this->modelSuborbital->listarViajesSuborbitalesDisponibles();
         echo $this->printer->render("view/SuborbitalReserva.html", $model);

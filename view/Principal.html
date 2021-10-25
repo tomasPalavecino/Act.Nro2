@@ -2,7 +2,7 @@
 
 <DIV style="height: 500px;">
 
-   <h1 style="text-align: center;">Bienvenido {{varSession}}</h1>
+   <h1 style="text-align: center;">Bienvenido {{usuario.nombreDeUsuario}}</h1>
     
 
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
@@ -16,7 +16,7 @@
   <div class="card" style="width: 20rem; height: auto;">
     <img src="/TPFINALPW2/public/img/suborbital.jpg" class="card-img-top" style="width: 20rem; height: 300px;" alt="...">
     <div class="card-body">
-      <p class="card-text">Si estas comenzando con los viajes especiales, el viaje sub orbital es para vos. <a href="/TPFINALPW2/Suborbital/show">Click aqui</a> </p>
+      <p class="card-text">Si estas comenzando con los viajes especiales, el viaje sub orbital es para vos. <a href="/TPFINALPW2/Suborbital/show?$id={{sessionId}}">Click aqui</a> </p>
     </div>
   </div>
 

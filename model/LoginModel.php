@@ -1,63 +1,51 @@
 <?php
 
-class LoginModel {
+class LoginModel
+{
     private $database;
 
     public
-    function __construct($database) {
-        $this -> database = $database;
+    function __construct($database)
+    {
+        $this->database = $database;
     }
 
-    public
-    function Loguearse($nombreUsuario, $clave) {
-        $tipoUsuario = $this -> comprobarTipoUsuario($nombreUsuario, $clave);
+    public function Loguearse($nombreUsuario, $clave)
+    {
+        $usuario = $this->comprobarTipoUsuario($nombreUsuario, $clave);
         $model = array();
-        if ($tipoUsuario == 1 || $tipoUsuario == 0) {
-            $_SESSION["nombreUsuario"] = $nombreUsuario;
-            $model = array("tipo" => $tipoUsuario, "varSession" => $_SESSION["nombreUsuario"]);
-            return $model;
-        }
-        if ($tipoUsuario == -1) {
-            $mensaje = "Usuario Inexistente";
-            $model = array("tipo" => $tipoUsuario, "error" => $mensaje);
-            return $model;
-        }
-        return $model;
 
+        if ($usuario["tipoDeUsuario"] == 0 || $usuario["tipoDeUsuario"] == 1) {
+            $tipoDeUsuario = $usuario["tipoDeUsuario"];
+            $_SESSION["nombreDeUsuario"] = $usuario["nombreDeUsuario"];
+            $_SESSION["idUsuario"] = $usuario["idUsuario"];
+            $model = array("tipo" => $tipoDeUsuario, "usuario" => $usuario, "sessionId" => $_SESSION["idUsuario"], "sessionNombre" => $_SESSION["nombreDeUsuario"]);
+
+            return $model;
+        }
+        $mensaje = "Usuario Inexistente";
+        $model = array("tipo" => $usuario, "error" => $mensaje);
+        return $model;
     }
 
     public
-    function comprobarTipoUsuario($nombreUsuario, $clave) {
+    function comprobarTipoUsuario($nombreUsuario, $clave)
+    {
         //compruebo si el usuario existe. si me devuelve un 1 es un admin si 0 un usuario comun
-        $cero = "0";
-        $uno = "1";
 
-        $consultaPorUsuarioComun = "SELECT * FROM Usuario WHERE nombreDeUsuario= '".$nombreUsuario.
-        "'AND contrasenia= '"
-        .$clave.
-        "'AND tipoDeUsuario = '".$cero.
-        "'";
+        $consultaPorUsuarioComun = "SELECT * FROM Usuario WHERE nombreDeUsuario= '" . $nombreUsuario .
+            "'AND contrasenia= '"
+            . $clave . "'";
 
-        $consultaPorAdmin = "SELECT * FROM Usuario WHERE nombreDeUsuario= '".$nombreUsuario.
-        "'AND contrasenia= '"
-        .$clave.
-        "'AND tipoDeUsuario = '".$uno.
-        "'";
 
-        $usuarioComun = $this -> database -> query($consultaPorUsuarioComun);
-        $usuarioAdmin = $this -> database -> query($consultaPorAdmin);
-
+        $usuarioComun = $this->database->query($consultaPorUsuarioComun);
 
 
         if ($usuarioComun) { //compruebo si devolvio algo.
-            return 0; //este me va a dirigir a la pagina de usuarioComun
-        } else if ($usuarioAdmin) {
-            return 1; //me va a dirigir a la pagina de admin
+            return $usuarioComun; //este me va a dirigir a la pagina de usuarioComun
+
         } else {
-            return -1; //me va a tirar un error de UsuarioInexistente.
+            return -1;
         }
-
     }
-
-
 }

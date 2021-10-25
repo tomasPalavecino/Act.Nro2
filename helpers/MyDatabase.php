@@ -7,12 +7,12 @@ class MyDataBase{
         $this->conection = mysqli_connect($servidor, $nombreUsuario, $contrasenia, $nombrebd);
 
         if (!$this->conection){
-            die("Connection failed: " . msyqli_connect_error());
+            die("Connection failed: ".msyqli_connect_error());
         }
 
     }
     public function agregar($insert){
-        return  mysqli_query($this->conection, $insert);
+        return  mysqli_query($this->conection, $insert, true);
     }
 
     public function query($consulta){//este metodo va hacer las consultas y va a devolver el valor.
@@ -21,7 +21,7 @@ class MyDataBase{
         if (mysqli_num_rows($databaseResult) <= 0)
             return [];
 
-        return mysqli_fetch_all($databaseResult,MYSQLI_ASSOC);
+        return mysqli_fetch_ASSOC($databaseResult);
     }
     }
 
