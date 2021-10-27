@@ -41,6 +41,26 @@ class Configuration{
         return new SuborbitalModel ($this->getDatabase());
     }
 
+    public function createOrbitalController(){
+        require_once("controller/OrbitalController.php");
+        return new OrbitalController($this->createOrbitalModel(),$this->createPrinter());
+    }
+  
+    public function createOrbitalModel(){
+        require_once("model/OrbitalModel.php");
+        return new OrbitalModel ($this->getDatabase());
+    }
+
+    public function createDestinosController(){
+        require_once("controller/DestinosController.php");
+        return new DestinosController($this->createDestinosModel(),$this->createPrinter());
+    }
+  
+    public function createDestinosModel(){
+        require_once("model/DestinosModel.php");
+        return new DestinosModel ($this->getDatabase());
+    }
+   
     
 
     private  function getDatabase(){

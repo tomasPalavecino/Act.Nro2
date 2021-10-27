@@ -1,6 +1,6 @@
 <?php
 
-class SuborbitalModel{
+class OrbitalModel{
 
     private $database;
 
@@ -10,11 +10,11 @@ class SuborbitalModel{
     }
 
 
-    public function listarViajesSuborbitalesDisponibles(){
+    public function listarViajesOrbitalesDisponibles(){
         $consulta = "SELECT * FROM viaje inner join equipo on viaje.idEquipo = equipo.idEquipo
         inner join TipoDeViaje on viaje.idTipoDeViaje = TipoDeViaje.idTipoDeViaje inner join salida
         on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join cabina on viaje.idCabina = cabina.idCabina  where TipoDeViaje.tipoDeViaje like 'Suborbital'" ;
+        inner join cabina on viaje.idCabina = cabina.idCabina  where TipoDeViaje.tipoDeViaje like 'Orbital'" ;
         $resultado = $this->database->query($consulta); //me devuelve un array
         return $resultado;
     }
@@ -37,3 +37,6 @@ class SuborbitalModel{
 
 
 }
+
+
+?>

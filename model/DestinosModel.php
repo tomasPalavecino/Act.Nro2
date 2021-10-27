@@ -1,6 +1,6 @@
 <?php
 
-class SuborbitalModel{
+class DestinosModel{
 
     private $database;
 
@@ -10,11 +10,11 @@ class SuborbitalModel{
     }
 
 
-    public function listarViajesSuborbitalesDisponibles(){
+    public function listarViajesEntreDestinosDisponibles(){
         $consulta = "SELECT * FROM viaje inner join equipo on viaje.idEquipo = equipo.idEquipo
         inner join TipoDeViaje on viaje.idTipoDeViaje = TipoDeViaje.idTipoDeViaje inner join salida
         on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join cabina on viaje.idCabina = cabina.idCabina  where TipoDeViaje.tipoDeViaje like 'Suborbital'" ;
+        inner join cabina on viaje.idCabina = cabina.idCabina  where TipoDeViaje.tipoDeViaje like 'Entre destinos'";//cambiar esta consulta
         $resultado = $this->database->query($consulta); //me devuelve un array
         return $resultado;
     }
@@ -23,7 +23,7 @@ class SuborbitalModel{
         $consulta = "SELECT * FROM viaje inner join equipo on viaje.idEquipo = equipo.idEquipo
         inner join TipoDeViaje on viaje.idTipoDeViaje = TipoDeViaje.idTipoDeViaje inner join salida
         on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join cabina on viaje.idCabina = cabina.idCabina where viaje.idViaje = '".$idViaje."'";
+        inner join cabina on viaje.idCabina = cabina.idCabina where viaje.idViaje = '".$idViaje."'";//joinear todas las tablas para mostrar la info
         $viaje = $this->database->obtenerArrayRegistro($consulta);
         return $viaje;
     }
@@ -37,3 +37,6 @@ class SuborbitalModel{
 
 
 }
+
+
+?>
