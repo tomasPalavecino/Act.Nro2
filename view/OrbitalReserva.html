@@ -1,7 +1,7 @@
 {{>headerSession}}
 
 
-{{varSession}} Por favor complete
+<h2 style="text-align: center; font-weight: bold;">Vuelos disponibles para Orbital</h2>
 
 
 <div style="display: flex; justify-content: center;">
@@ -10,12 +10,13 @@
             <tr>
                 <th scope="col">numero</th>
                 <th scope="col">Tipo </th>
-                <th scope="col">Equipo</th>
                 <th scope="col">Fecha de Salida</th>
                 <th scope="col">Fecha de Regreso</th>
-
-
-
+                <th scope="col">Lugar de Salida</th>
+                <th scope="col">Lugar de Regreso</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Matricula</th>
             </tr>
 
             {{#orbitales}}
@@ -25,9 +26,14 @@
 
                 <td><a href="/TPFINALPW2/Orbital/showForm?idViaje={{idViaje}}&fsal={{fechaSalida}}&freg={{fechaRegreso}}">{{idViaje}}</a></td>
                 <td>{{tipoDeViaje}}</td>
-                <td>{{equipo}}</td>
                 <td>{{fechaSalida}}</td>
                 <td>{{fechaRegreso}}</td>
+                <td>{{LugarSal}}</td>
+                <td>{{LugarDes}}</td>
+                <td>{{modelo}}</td>
+                <td>{{equipo}}</td>
+                <td>{{matricula}}</td>
+
 
 
 

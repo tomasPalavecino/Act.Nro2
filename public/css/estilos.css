@@ -12,6 +12,10 @@ body{
 	font-family: 'Roboto', sans-serif;
 }
 
+main{
+	border-radius: 10px;
+}
+
 a{
 	color: #fff;
 	text-decoration: none;

@@ -11,10 +11,11 @@ class SuborbitalModel{
 
 
     public function listarViajesSuborbitalesDisponibles(){
-        $consulta = "SELECT * FROM viaje inner join equipo on viaje.idEquipo = equipo.idEquipo
-        inner join TipoDeViaje on viaje.idTipoDeViaje = TipoDeViaje.idTipoDeViaje inner join salida
+        $consulta = "SELECT * FROM viaje inner join aeronave on viaje.idAeronave = aeronave.idAeronave
+        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
         on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join cabina on viaje.idCabina = cabina.idCabina  where TipoDeViaje.tipoDeViaje like 'Suborbital'" ;
+        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo
+        where tipodeviaje.tipoDeViaje like 'Suborbital'" ;
         $resultado = $this->database->query($consulta); //me devuelve un array
         return $resultado;
     }

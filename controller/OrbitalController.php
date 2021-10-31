@@ -22,7 +22,6 @@ class OrbitalController{
             echo $this->printer->render("view/OrbitalReserva.html", $model);
         }else {
             header ("Location:/TPFINALPW2/Login/show");
-
         }
 
     }
