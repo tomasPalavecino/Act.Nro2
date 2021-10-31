@@ -130,11 +130,4 @@ de forma dinamica se van a crear registros por la cantidad de disponibilidad de 
 elegir que lugar ocupar, ese lugar o mas bien, esa reserva va a quedar con estado ocupado*/
 
 /*LOS VUELOS ORBITALES NO TIENEN DESTINO Y SALIDA (PORQUE ESO ES PARA ENTRE DESTINOS)*/
-SELECT * FROM viaje inner join aeronave on viaje.idAeronave = aeronave.idAeronave
-        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
-        on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo
-        where tipodeviaje.tipoDeViaje like 'Orbital';
-
-select * from viaje;
-select * from aeronave;
+select * from chequeomedico;

@@ -27,6 +27,16 @@ class MyDataBase{
         return mysqli_fetch_array($resultado);
     }
 
+    public function consultarSiExisteRegistro($consulta){
+
+        $databaseResult = mysqli_query($this->conection, $consulta);
+
+        if (mysqli_num_rows($databaseResult) <= 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
 
     }
 

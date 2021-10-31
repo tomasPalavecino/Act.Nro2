@@ -28,16 +28,42 @@ class DestinosController{
     }
 
     public function showForm(){
-        if (isset($_SESSION["idUsuario"])){
-            $varSession = $_SESSION["nombreUsuario"];
-            $model["nombreSession"] = $varSession;
-            $model["data"] = array ("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
-            
-            echo $this->printer->render("view/formularioEntreDestinosReserva.html", $model);
-    
-        }else {
-            header ("Location: /TPFINALPW2/Login/show");
+        if (isset($_SESSION["idUsuario"])) {
 
+
+            $idViaje = $_GET["idViaje"];
+            $idUsuario = $_SESSION["idUsuario"];
+            $validacionTipoUsuario = $this->modelEntreDestinos->comprobarSiPuedeVolar($idUsuario, $idViaje); //boolean
+            $varSession = $_SESSION["nombreUsuario"];
+
+            $validacionTieneChequeoRealizado = $this->modelEntreDestinos->comprobarChequeoExistente($idUsuario);
+
+            if ($validacionTieneChequeoRealizado == true) {
+
+                if ($validacionTipoUsuario == true) {
+                    $model["nombreSession"] = $varSession;
+                    $model["data"] = array("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
+                    echo $this->printer->render("view/formularioEntreDestinosReserva.html", $model);
+                } else {
+                    $varSession = $_SESSION["nombreUsuario"];
+                    $error = "Usted no puede acceder a este tipo de vuelos, debe ser del tipo 3";
+
+                    $model["nombreSession"] = $varSession;
+                    $model["error"] = $error;
+                    echo $this->printer->render("view/alertaReserva.html", $model);
+                }
+            } else {
+                $model["nombreSession"] =  $varSession;
+                $model["error"] = "Para reservar un vuelo usted necesita tener el chequeo medico realizado";
+                echo $this->printer->render("view/alertaReserva.html", $model);
+            }
+
+
+
+            //Si es tipo 1 y 2 (Suborbital y baja aceleracion) y si 3, los 3
+
+        } else {
+            header("Location: /TPFINALPW2/Login/show");
         }
 
     }

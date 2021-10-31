@@ -1,0 +1,22 @@
+{{> headerSession}}
+<div class="contenedorRegistro" style="display:flex; justify-content:center; padding:25px;">
+    <div class="cuadro-login wow animate__animated animate__backInLeft ">
+        <h3>Chequeo Medico</h3>
+        <p style="color:red; font-weight: bold; text-align: center;">  {{error}} </p>
+        <form action="/TPFINALPW2/chequeo/chequeo" method="POST">
+            <div class="txt-info">
+                <input type="text" name="dni" id="dni" required>
+                <span></span>
+                <label>Dni</label>
+            </div>
+            <div class="txt-info">
+                <input type="number" name="edad" id="edad" required>
+                <span></span>
+                <label>Edad</label>
+            </div> <input type="submit" value="Enviar chequeo">
+            <br>
+            <br>
+        </form>
+    </div>
+</div>
+{{> footer}}

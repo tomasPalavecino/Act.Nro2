@@ -61,6 +61,15 @@ class Configuration{
         return new DestinosModel ($this->getDatabase());
     }
    
+    public function createChequeoController(){
+        require_once("controller/ChequeoController.php");
+        return new ChequeoController($this->createChequeoModel(),$this->createPrinter());
+        }
+         
+    public function createChequeoModel(){
+        require_once("model/ChequeoModel.php");
+        return new ChequeoModel($this->getDatabase());
+        }
     
 
     private  function getDatabase(){
