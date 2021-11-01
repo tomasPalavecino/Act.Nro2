@@ -36,7 +36,6 @@ class SuborbitalController
             $idUsuario = $_SESSION["idUsuario"];
             $validacionTipoUsuario = $this->modelSuborbital->comprobarSiPuedeVolar($idUsuario, $idViaje); //boolean
             $varSession = $_SESSION["nombreUsuario"];
-
             $validacionTieneChequeoRealizado = $this->modelSuborbital->comprobarChequeoExistente($idUsuario);
 
             if ($validacionTieneChequeoRealizado == true) {
@@ -44,6 +43,8 @@ class SuborbitalController
                 if ($validacionTipoUsuario == true) {
                     $model["nombreSession"] = $varSession;
                     $model["data"] = array("idViaje" => $_GET["idViaje"], "regreso" => $_GET["freg"], "salida" => $_GET["fsal"]);
+                    $idViaje = $_GET["idViaje"];
+                    $model["disponibilidad"] = $this->modelSuborbital->obtenerReservasDisponibles($idViaje);
                     echo $this->printer->render("view/formularioSuborbitalReserva.html", $model);
                 } else {
                     $varSession = $_SESSION["nombreUsuario"];
@@ -76,7 +77,9 @@ class SuborbitalController
         $idUsuario =  $_SESSION["idUsuario"];
         $_SESSION["NumRandom"] = rand(5000, 6000);
         $nRan = $_SESSION["NumRandom"];
-
+        $idReserva = $_POST["idReserva"];
+        $reserva = $this->modelSuborbital->obtenerAsientoPorReserva($idReserva);
+        $asiento = $reserva["asiento"];
         $viaje = $this->modelSuborbital->obtenerViajePorId($idViaje);
 
 
@@ -86,11 +89,11 @@ class SuborbitalController
         $email_mensaje .= "Direccion: " . $_POST["direccion"] . "\r\n";
         $email_mensaje .= "Con Fecha de Salida: " . $viaje["fechaSalida"] . "\r\n";
         $email_mensaje .= "Con Fecha de Regreso: " . $viaje["fechaRegreso"] . "\r\n";
-        $email_mensaje .= "Viaje de tipo Suborbital: \r\n";
-        $email_mensaje .= "La duracion sera de: " . $viaje["duracion"] . " dias \r\n";
+        $email_mensaje .= "Viaje de tipo: Suborbital \r\n";
         $email_mensaje .= "Viajara en cabina de tipo: " . $viaje["cabina"] . "\r\n";
+        $email_mensaje .= "Su asiento sera el N- : " . $asiento . "\r\n";
         $email_mensaje .= "Su equipo sera: " . $viaje["equipo"] . "\r\n";
-        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Suborbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario&nRan=$nRan";
+        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Suborbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario&nRan=$nRan&idReserva=$idReserva";
 
 
         // destinatario//
@@ -100,10 +103,15 @@ class SuborbitalController
             'X-Mailer: PHP/' . phpversion();
 
         if (mail($emailTo, $emailSubject, $email_mensaje, $headers)) {
-            echo 'enviado';
+            $model["mensaje"] = "Por favor, revise su casilla de correo para confirmar el viaje";
+            $model["nombreSession"] = $_SESSION["nombreUsuario"];
+
+            echo $this->printer->render("view/envioDeMailConfirmacion.html", $model);
         } else {
-            echo 'no se envio';
-            echo $email_mensaje;
+            $model["mensaje"] = "Disculpe, ha ocurrido un error. Intente reenviar su solicitud";
+            $model["nombreSession"] = $_SESSION["nombreUsuario"];
+
+            echo $this->printer->render("view/envioDeMailConfirmacion.html", $model);
         }
     }
 
@@ -111,13 +119,12 @@ class SuborbitalController
     {
 
         if ($_SESSION["NumRandom"] == $_GET["nRan"]) {
-            $idViaje = $_GET["idViaje"];
+            $idReserva = $_GET["idReserva"];
             $idUsuario = $_GET["idUsuario"];
             $varSession = $_SESSION["nombreUsuario"];
             $model["nombreSession"] = $varSession;
-            $this->modelSuborbital->reservarViaje($idViaje, $idUsuario);
-
-
+            $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
+            
             echo $this->printer->render("view/reservaExitosa.html", $model);
         } else {
             echo "Ups ha ocurrido un error";

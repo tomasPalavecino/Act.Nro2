@@ -57,7 +57,6 @@ constraint fkATipo foreign key (idTipoDeViaje) references tipodeviaje (idTipoDeV
 constraint fkACabina foreign key (idCabina) references cabina (idCabina), /* Familiar etc.*/
 constraint fkAEquipo foreign key (idEquipo) references equipo (idEquipo), /* Familiar etc.*/
 constraint fkaModelo foreign key (idModelo) references modelo (idModelo)
-
 );
 
 create table viaje (idViaje int not null auto_increment,
@@ -75,7 +74,7 @@ constraint FK_A_Destino foreign key (idDestino) references destino (idDestino)
 
 create table reserva (idReserva int not null auto_increment,
 idViaje int not null,
-idUsuario int not null,
+idUsuario int,
 asiento int, /* va haber tanta cantidad de asientos para este vuelo como capacidad tenga el avion */
 estado boolean default false, /*si esta ocupado o no */
 /*se puede reservar mas de uno a la vez, el asiento va a representar dentro de la capacidad de la aeronave 
@@ -93,6 +92,7 @@ value("General"),("Familiar"),("Suite");
 
 insert into Equipo (equipo)
 values ("Orbital"),("Baja aceleracion"),("Alta aceleracion");
+
 
 insert into TipoDeViaje (tipoDeViaje)
 values ("Suborbital"),("Orbital"),("Entre destinos");
@@ -114,7 +114,7 @@ value ("Estación Espacial Internacional"),("OrbiterHotel"),("Luna"),("Marte"),
 
 /*RECORDAR QUE SOLO EL VIAJE ENTRE DESTINOS TIENE SALIDA Y DESTINO. LOS OTROS SON SOLO SUBORBITALES Y ORBITALES*/
 
-insert into viaje (fechaSalida,fechaRegreso,idSalida, idDestino, idAeronave)
+/*insert into viaje (fechaSalida,fechaRegreso,idSalida, idDestino, idAeronave)
 values (20211120,20240101,1,2,8),(20211110,20230201,1,2,8),(20211120,20300101,2,4,9)
 ,(20211010,20220101,2,5,11),(20211120,20220101,1,7,10),(20221120,20230101,1,6,9),
 (20211120,20240101,1,2,8),(20211110,20230201,1,2,10),(20211120,20300101,2,4,9)
@@ -124,10 +124,21 @@ values (20211120,20240101,1,2,8),(20211110,20230201,1,2,8),(20211120,20300101,2,
 ,(20210804,20221002,1,6,6),(20250101,20260101,1,6,7),(20230104,20230501,2,6,3),
 (20211120,20240101,1,6,4),(20211201,20211230,2,6,1),(20211120,20300101,2,6,7)
 ,(20211205,20220501,2,6,6),(20211120,20220101,1,6,7),(20221120,20230101,1,6,3);
-
+*/
 /*VOY A LISTAR LOS ASIENTOS DISPONIBLES PARA ESE VUELO. Cuando se seleccione un vuelo 
 de forma dinamica se van a crear registros por la cantidad de disponibilidad de la nave, los usuarios pueden
 elegir que lugar ocupar, ese lugar o mas bien, esa reserva va a quedar con estado ocupado*/
 
 /*LOS VUELOS ORBITALES NO TIENEN DESTINO Y SALIDA (PORQUE ESO ES PARA ENTRE DESTINOS)*/
+select * from viaje;
+select * from reserva;
+select * from tipodeviaje;
+
+SELECT * FROM viaje inner join aeronave on viaje.idAeronave = aeronave.idAeronave
+        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
+        on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
+        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo 
+        inner join cabina on cabina.idCabina = aeronave.idCabina where viaje.idViaje = 1;
 select * from chequeomedico;
+select * from aeronave;
+SELECT * FROM viaje ORDER BY idViaje DESC LIMIT 1;

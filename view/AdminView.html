@@ -1,5 +1,29 @@
-{{> header}}
+{{> headerSession}}
 
-<h1>Bienvenido ADMIN - Esta es la pagina especial de admin</h1>
+<h1 style="text-align: center; font-weight: bold;">Bienvenido admin: {{usuario.nombreDeUsuario}}</h1>
+
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+
+   <div class="card" style="width:70%">
+    <h5 class="card-header">Habilitacion Medica</h5>
+    <div class="card-body">
+      <p class="card-text">Habilitar a un Usuario a realizarse nuevamente el chequeo medico </p>
+      <a href="/TPFINALPW2/Admin/showFormHabilitacionMedica" class="btn btn-primary">Entrar</a>
+    </div>
+  </div>
+
+  <div class="card" style="width:70%; margin-top: 20px;" >
+    <h5 class="card-header">Registro de viajes</h5>
+    <div class="card-body">
+      <p class="card-text">Si desea registrar un nuevo viaje</p>
+      <a href="/TPFINALPW2/Admin/showFormNuevoVuelo" class="btn btn-primary">Entrar</a>
+    </div>
+  
+</div>
+
+</div>
+
+ 
 
 {{> footer}}

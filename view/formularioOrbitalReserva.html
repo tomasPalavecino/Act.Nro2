@@ -24,6 +24,17 @@
                    
                 </div>
 
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <h3 style="text-align: center;">Seleccione la ubicacion deseada</h3>
+                    <div style="width:300px;">
+                        {{#disponibilidad}}
+                        <input type="radio" name="idReserva" value="{{idReserva}}">
+                        <label>{{asiento}}</label>                         
+                        {{/disponibilidad}}
+                    </div>
+                    
+                </div>
+
                
 
                 

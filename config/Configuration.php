@@ -70,6 +70,16 @@ class Configuration{
         require_once("model/ChequeoModel.php");
         return new ChequeoModel($this->getDatabase());
         }
+
+    public function createAdminController(){
+        require_once("controller/AdminController.php");
+        return new AdminController($this->createAdminModel(), $this->createPrinter());
+    }
+
+    public function createAdminModel(){
+        require_once("model/AdminModel.php");
+        return new AdminModel($this->getDatabase());
+    }
     
 
     private  function getDatabase(){
