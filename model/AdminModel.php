@@ -85,11 +85,13 @@ class AdminModel
     public function crearReservasParaEseVuelo($idDelVuelo,$idAeronave){
         $consulta = "SELECT capacidad from aeronave where idAeronave = '".$idAeronave."'";
         $capacidadDeLaAeronave =  $this->database->obtenerArrayRegistro($consulta);
+        $caracteresPermitidos = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         for ($i = 1 ; $i <= $capacidadDeLaAeronave["capacidad"]; $i++){
+            $numeroAlfanumerico = substr(str_shuffle($caracteresPermitidos),0,8);
 
-            $reserva = "INSERT INTO reserva (idViaje, asiento)
-            values ('".$idDelVuelo."' , '".$i."')";
+            $reserva = "INSERT INTO reserva (idViaje, asiento, codigoAlfanumerico)
+            values ('".$idDelVuelo."' , '".$i."', '".$numeroAlfanumerico."')";
 
             $this->database->agregar($reserva);
         }

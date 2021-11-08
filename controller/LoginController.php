@@ -22,28 +22,42 @@ class LoginController{
             $nombreUsuario = $_POST["NombreUsuario"];
             $clave = $_POST["clave"];
 
-            $model = $this->loginModel->Loguearse($nombreUsuario, $clave);
-           
-
-       if ($model["tipo"] == 0){
-        echo $this->printer->render("view/Principal.html", $model);
-       }
-
-       if ($model["tipo"] == 1){
-        echo $this->printer->render("view/AdminView.html", $model);
-
-       } 
-       if ($model["tipo"] == -1){
-
-        echo $this->printer->render("view/LoginView.html", $model);
-       }
+            $this->loginModel->Loguearse($nombreUsuario, $clave);
+            $this->showPaginaPrincipal();
         
-
        }else {
         echo $this->printer->render("view/LoginView.html");
 
        }
 
+    }
+
+    function showPaginaPrincipal(){
+
+        if(isset($_SESSION["idUsuario"])){
+
+        
+        if ($_SESSION["tipoDeUsuario"] == 0){
+            $model = array("nombreSession" => $_SESSION["nombreUsuario"], "idSession" =>  $_SESSION["idUsuario"]);
+            echo $this->printer->render("view/Principal.html", $model);
+           }
+    
+           if ($_SESSION["tipoDeUsuario"] == 1){
+            $model = array("nombreSession" => $_SESSION["nombreUsuario"], "idSession" =>  $_SESSION["idUsuario"]);
+            echo $this->printer->render("view/AdminView.html", $model);
+    
+           }
+
+           if ($_SESSION["tipoDeUsuario"] == -1){
+            session_destroy();
+            $mensaje = "Usuario Inexistente";
+            $model = array( "error" => $mensaje);
+            echo $this->printer->render("view/LoginView.html", $model);
+           }
+        }else{
+            echo $this->printer->render("view/LoginView.html");
+
+        }
     }
 
 }

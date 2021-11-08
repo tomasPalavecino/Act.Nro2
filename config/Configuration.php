@@ -1,7 +1,10 @@
 <?php
-class Configuration{
 
+use Dompdf\Dompdf;
+
+class Configuration{
     private $config;
+    
 
     public  function createRegistroController(){ //registroController
         require_once("controller/RegistroController.php");
@@ -33,7 +36,7 @@ class Configuration{
 
     public function createSuborbitalController(){
         require_once("controller/SuborbitalController.php");
-        return new SuborbitalController($this->createSuborbitalModel(),$this->createPrinter());
+        return new SuborbitalController($this->createDomPDF(), $this->createSuborbitalModel(),$this->createPrinter());
     }
   
     public function createSuborbitalModel(){
@@ -95,10 +98,7 @@ class Configuration{
         return  $this->config;
     }
 
-    private function getLogger(){
-        require_once("helpers/Logger.php");
-        return new Logger();
-    }
+  
 
     public function createRouter($defaultController, $defaultAction){
         include_once("helpers/Router.php");
@@ -110,5 +110,12 @@ class Configuration{
         require_once("helpers/MustachePrinter.php");
         return new MustachePrinter("view/partials");
     }
+
+    private function createDomPDF(){
+        require_once 'helpers/PdfPrinter.php';
+        return new PdfPrinter();
+
+    }
+
 
 }

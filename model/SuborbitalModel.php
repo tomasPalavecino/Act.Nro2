@@ -67,6 +67,8 @@ class SuborbitalModel
     {
         $insert = "UPDATE reserva set idUsuario = '".$idUsuario."', estado = '".true."' where idReserva = '".$idReserva."'";
         $this->database->agregar($insert);
+
+        return $this->obtenerTodaLaInformacionParaElPDF($idReserva);
     }
 
     public function comprobarChequeoExistente($idUsuario){
@@ -77,14 +79,26 @@ class SuborbitalModel
      }
 
      public function obtenerReservasDisponibles($idViaje){
-        $consulta = "SELECT * FROM reserva where idViaje = '".$idViaje."'";
+        $consulta = "SELECT * FROM reserva where idViaje = '".$idViaje."' and estado = false";
         return $this->database->query($consulta);
 
      }
      
 
      public function obtenerAsientoPorReserva($idReserva){
-         $consulta = "SELECT * FROM reserva where idReserva = '".$idReserva."'";
+         $consulta = "SELECT * FROM reserva where idReserva = '".$idReserva."'" ;
          return $this->database->obtenerArrayRegistro($consulta);
      }
+
+    public function obtenerTodaLaInformacionParaElPDF($idReserva){
+        $consulta = "SELECT * FROM reserva inner join viaje on viaje.idViaje = reserva.idViaje
+        inner join aeronave on viaje.idAeronave = aeronave.idAeronave
+        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
+        on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
+        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo 
+        inner join cabina on cabina.idCabina = aeronave.idCabina  where reserva.idReserva = '".$idReserva."'";
+         return $this->database->obtenerArrayRegistro($consulta);
+    
+}
+
 }

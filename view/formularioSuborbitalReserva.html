@@ -24,22 +24,24 @@
                    
                 </div>
 
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">Seleccione la ubicacion deseada</h3>
+                <div style="display: flex; flex-direction: column; align-items: center; background-color: #252440; padding:50px">
+                    <h3 style="text-align: center; color:azure;">Seleccione la ubicacion deseada</h3>
                     <div style="width:300px;">
                         {{#disponibilidad}}
-                        <input type="radio" name="idReserva" value="{{idReserva}}">
-                        <label>{{asiento}}</label>                         
+                                              
+                        <input type="checkbox" id="{{idReserva}}" name="idReserva" value="{{idReserva}}" class="btn-check" autocomplete="off">
+                        <label class="btn btn-secondary" for="{{idReserva}}" style="height: 50px; width: 50px; margin: 2px;"> {{asiento}}</label>
+                                                   
                         {{/disponibilidad}}
                     </div>
                     
                 </div>
-
-  
                
 
                 
-                <button type="submit" class="btn btn-primary" style="width:80%; margin-left: 100px; margin-bottom: 20px; margin-top: 20px;">Solicitar turno</button>
+                        <button type="submit" class="btn btn-primary" style="width:30%; align-self: center; margin-top: 5px;">Solicitar turno</button>
+                       <div class="registrate" style="margin:10px"><a href="/TPFINALPW2/login/showPaginaPrincipal">Regresar</a> </div>
+
             </form>
 
     </div>

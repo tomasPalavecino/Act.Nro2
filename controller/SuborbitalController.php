@@ -1,17 +1,20 @@
 <?php
 
 
+
 class SuborbitalController
 {
 
     private $modelSuborbital;
     private $printer;
+    private $dompdf;
 
     //ver luego si requiero un model
-    public function __construct($modelSuborbital, $printer)
+    public function __construct($dompdf,$modelSuborbital, $printer)
     {
         $this->modelSuborbital = $modelSuborbital;
         $this->printer = $printer;
+        $this->dompdf = $dompdf;
     }
 
     public function show()
@@ -117,17 +120,18 @@ class SuborbitalController
 
     public function reservar()
     {
+       
 
         if ($_SESSION["NumRandom"] == $_GET["nRan"]) {
             $idReserva = $_GET["idReserva"];
             $idUsuario = $_GET["idUsuario"];
             $varSession = $_SESSION["nombreUsuario"];
             $model["nombreSession"] = $varSession;
-            $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
-            
-            echo $this->printer->render("view/reservaExitosa.html", $model);
+            $viaje = $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
+            $this->dompdf->render($viaje, $varSession);
         } else {
             echo "Ups ha ocurrido un error";
         }
     }
+   
 }

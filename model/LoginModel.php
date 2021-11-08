@@ -14,20 +14,13 @@ class LoginModel
     function Loguearse($nombreUsuario, $clave)
     {
         $tipoUsuario = $this->comprobarTipoUsuario($nombreUsuario, $clave);
-        $model = array();
-        if ($tipoUsuario == 1 || $tipoUsuario == 0) {
+        
             $usuario = $this->obtenerUsuarioPorId($nombreUsuario, $clave);
             $_SESSION["nombreUsuario"] = $usuario["nombreDeUsuario"];
             $_SESSION["idUsuario"] = $usuario["idUsuario"];
-            $model = array("tipo" => $tipoUsuario, "nombreSession" => $_SESSION["nombreUsuario"], "idSession" =>  $_SESSION["idUsuario"]);
-            return $model;
-        }
-        if ($tipoUsuario == -1) {
-            $mensaje = "Usuario Inexistente";
-            $model = array("tipo" => $tipoUsuario, "error" => $mensaje);
-            return $model;
-        }
-        return $model;
+            $_SESSION["tipoDeUsuario"] = $tipoUsuario;
+            
+       
     }
 
     public

@@ -124,8 +124,8 @@ class DestinosController
             $model["nombreSession"] = $varSession;
             $this->modelEntreDestinos->reservarViaje($idUsuario, $idReserva);
 
-
-            echo $this->printer->render("view/reservaExitosa.html", $model);
+            $viaje = $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
+            $this->dompdf->render($viaje, $varSession);
         } else {
             echo "Ups ha ocurrido un error";
         }

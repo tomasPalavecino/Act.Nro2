@@ -77,6 +77,7 @@ idViaje int not null,
 idUsuario int,
 asiento int, /* va haber tanta cantidad de asientos para este vuelo como capacidad tenga el avion */
 estado boolean default false, /*si esta ocupado o no */
+codigoAlfanumerico varchar(20),
 /*se puede reservar mas de uno a la vez, el asiento va a representar dentro de la capacidad de la aeronave 
 asignada. Hacer un innter join con viaje y uno con aeronave*/
 constraint PKPAC primary key (idReserva),
@@ -130,15 +131,10 @@ de forma dinamica se van a crear registros por la cantidad de disponibilidad de 
 elegir que lugar ocupar, ese lugar o mas bien, esa reserva va a quedar con estado ocupado*/
 
 /*LOS VUELOS ORBITALES NO TIENEN DESTINO Y SALIDA (PORQUE ESO ES PARA ENTRE DESTINOS)*/
+
+select * from tipodeviaje;
+select * from aeronave;
+select * from usuario;
+select * from chequeomedico;
 select * from viaje;
 select * from reserva;
-select * from tipodeviaje;
-
-SELECT * FROM viaje inner join aeronave on viaje.idAeronave = aeronave.idAeronave
-        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
-        on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
-        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo 
-        inner join cabina on cabina.idCabina = aeronave.idCabina where viaje.idViaje = 1;
-select * from chequeomedico;
-select * from aeronave;
-SELECT * FROM viaje ORDER BY idViaje DESC LIMIT 1;

@@ -35,7 +35,7 @@ class AdminController
     public function registrarVuelo()
     {
 
-        if ($_SESSION["idUsuario"]) {
+        if (isset($_SESSION["idUsuario"])) {
 
 
             $model["nombreSession"] = $_SESSION["nombreUsuario"];
