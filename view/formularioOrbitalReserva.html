@@ -1,0 +1,50 @@
+{{> headerSession}}
+
+
+
+<div style="display: flex; justify-content: center;">
+    <div style="height: auto; background-color: aliceblue; width: 80%; border-radius: 10px; margin-top: 20px;" >
+        <h2
+            style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-weight: bold; text-align: center; color:rgb(0, 21, 39)">
+            Complete sus datos para anotarse al viaje del dia <br> {{data.salida}} al {{data.regreso}}</h1>
+            <form action="/TPFINALPW2/Orbital/enviarEmail?idViaje={{data.idViaje}}" method="post" style="display:flex; flex-direction: column; ">
+                <div class="form-row" style="padding: 20px 10px;">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    </div>
+                   
+                </div>
+
+                <div class="form-row" style="padding: 20px 10px;">
+                    <div class="form-group col-md-6">
+                        <label for="direccion">Direccion</label>
+                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Direccion">
+                    </div>
+                   
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; background-color: #252440; padding:50px">
+                    <h3 style="text-align: center; color:azure;">Seleccione la ubicacion deseada</h3>
+                    <div style="width:300px;">
+                        {{#disponibilidad}}
+                                              
+                        <input type="checkbox" id="{{idReserva}}" name="idReserva" value="{{idReserva}}" class="btn-check" autocomplete="off">
+                        <label class="btn btn-secondary" for="{{idReserva}}" style="height: 50px; width: 50px; margin: 2px;"> {{asiento}}</label>
+                                                   
+                        {{/disponibilidad}}
+                    </div>
+                    
+                </div>
+               
+
+                
+                        <button type="submit" class="btn btn-primary" style="width:30%; align-self: center; margin-top: 5px;">Solicitar turno</button>
+                       <div class="registrate" style="margin:10px"><a href="/TPFINALPW2/login/showPaginaPrincipal">Regresar</a> </div>
+
+            </form>
+
+    </div>
+</div>
+
+{{>footer}}

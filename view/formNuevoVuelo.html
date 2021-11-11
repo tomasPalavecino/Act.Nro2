@@ -1,0 +1,58 @@
+{{>headerSession}}
+
+<div class="contenedorRegistro" style="display:flex; justify-content:center; padding:25px;">
+    <div class="cuadro-login wow animate__animated animate__backInLeft " style="width: 50%;">
+                    <h3>Nuevo Vuelo: Ingrese los datos por favor</h3>
+                    <form action="/TPFINALPW2/Admin/registrarVuelo" method="POST">
+                        <div class="txt-info">
+                            <h4>Seleccione la aeronave</h4>
+                            <select name="aeronave" id="aeronave" style="width:100% ;" required>
+                                {{#aviones}}
+                                <option value="{{idAeronave}}"> {{modelo}} - {{matricula}} - {{tipoDeViaje}}</option>
+                                {{/aviones}}
+                                <span></span>
+                            </select>
+
+                        </div>
+                        <div class="txt-info">
+                            <h4>Seleccione el lugar de salida</h4>
+                            <select name="salida" id="salida" style="width: 100%;" required>
+                                {{#salidas}}
+                                <option value="{{idSalida}}"> {{LugarSal}}</option>
+                                {{/salidas}}
+                                <span></span>
+                            </select>
+                        </div>
+    
+                        <div class="txt-info">
+                            <h4>Seleccione el lugar de salida</h4>
+                            <select name="destino" id="destino" style="width: 100%;" required>
+                                {{#destinos}}
+                                <option value="{{idDestino}}"> {{LugarDes}}</option>
+                                {{/destinos}}
+                                <span></span>
+                            </select>
+                        </div>
+
+                        <div class="txt-info">
+                            <h4>Seleccione la fecha de salida</h4>
+                            <input type="date" name="FSal" id="Fsal" required>
+                            <span></span>
+                        </div>
+
+                        <div class="txt-info">
+                            <h4>Seleccione la fecha de llegada</h4>
+                            <input type="date" name="FLlegada" id="FLlegada" required>
+                            <span></span>
+                        </div>
+    
+                        <input type="submit" value="Registrar Nuevo Vuelo">
+                        <h4 style="color:red; text-align: center;">{{error}}</h4>
+                        
+                        <div class="registrate"> <a href="/TPFINALPW2/login/showPaginaPrincipal">Regresar</a> </div>
+                    </form>
+                </div>
+    </div>
+
+
+{{footer}}

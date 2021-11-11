@@ -1,0 +1,30 @@
+{{> header}}
+<div class="contenedorRegistro" style="display:flex; justify-content:center; padding:25px;">
+<div class="cuadro-login wow animate__animated animate__backInLeft ">
+                <h3>Registro</h3>
+                <form action="/TPFINALPW2/registro/registrar" method="POST">
+                    <div class="txt-info">
+                        <input type="text" name="NombreUsuario" id="nombreUsuario" required>
+                        <span></span>
+                        <label>NombreUsuario</label>
+                    </div>
+                    <div class="txt-info">
+                        <input type="password" name="clave" id="clave" required>
+                        <span></span>
+                        <label>Contraseña</label>
+                    </div>
+
+                    <div class="txt-info">
+                        <input type="password" name="claveRepetida" id="claveRepetida" required>
+                        <span></span>
+                        <label>Repetir contraseña</label>
+                    </div>
+
+                    <input type="submit" value="Registrarse">
+                    <div class="registrate">Ya estas registrado? <a href="/TPFINALPW2/Login">LOGUEATE ACA</a> </div>
+                    <h4 style="color:red; text-align: center;">{{dato}}</h4>
+
+                </form>
+            </div>
+</div>
+{{> footer}}
