@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(E_ERROR);
 include_once("config/Configuration.php");
 
 $module = isset($_GET["module"]) ? $_GET["module"] : "Login" ;//la pagina por defecto es 

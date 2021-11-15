@@ -9,7 +9,7 @@ class PdfPrinter{
         
     }
 
-    public function render($contenido, $fileName){
+    public function render($contenido, $fileName, $qr){
 
         $dompdf = new Dompdf();
         $numeroAlfanumerico = $contenido["codigoAlfanumerico"];
@@ -24,6 +24,10 @@ class PdfPrinter{
         $equipo = $contenido["equipo"];
         $modelo = $contenido["modelo"];
         $cabina = $contenido["cabina"];
+
+        $qr = $qr->imprimirQr() ;
+        
+
 
         $dompdf->loadHtml("<style>
         
@@ -87,7 +91,7 @@ class PdfPrinter{
         <li>Asciento: $numeroAsiento</li>
         <li>Equipo: $equipo</li>
         <p>Codigo Alfanumerico: $numeroAlfanumerico<p>
-
+        <li> $qr </li>
 
     </ul>
   

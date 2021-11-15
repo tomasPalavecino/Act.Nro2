@@ -117,5 +117,10 @@ class Configuration{
 
     }
 
+    private function createQRPrinter(){
+        require_once 'helpers/QRPrinter.php';
+        return new QRPrinter("www.google.com");
+    }
+
 
 }

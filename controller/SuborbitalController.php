@@ -8,6 +8,7 @@ class SuborbitalController
     private $modelSuborbital;
     private $printer;
     private $dompdf;
+    private $qr;
 
     //ver luego si requiero un model
     public function __construct($dompdf,$modelSuborbital, $printer)
@@ -128,7 +129,8 @@ class SuborbitalController
             $varSession = $_SESSION["nombreUsuario"];
             $model["nombreSession"] = $varSession;
             $viaje = $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
-            $this->dompdf->render($viaje, $varSession);
+            $qr=new QRPrinter("www.google.com");
+            $this->dompdf->render($viaje, $varSession, $qr);
         } else {
             echo "Ups ha ocurrido un error";
         }
