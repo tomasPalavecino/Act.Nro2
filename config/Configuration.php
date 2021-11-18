@@ -36,7 +36,7 @@ class Configuration{
 
     public function createSuborbitalController(){
         require_once("controller/SuborbitalController.php");
-        return new SuborbitalController($this->createDomPDF(), $this->createSuborbitalModel(),$this->createPrinter());
+        return new SuborbitalController($this->createDomPDF(), $this->createSuborbitalModel(),$this->createPrinter(), $this->createQRPrinter());
     }
   
     public function createSuborbitalModel(){
@@ -46,7 +46,7 @@ class Configuration{
 
     public function createOrbitalController(){
         require_once("controller/OrbitalController.php");
-        return new OrbitalController($this->createOrbitalModel(),$this->createPrinter());
+        return new OrbitalController($this->createDomPDF(),$this->createOrbitalModel(),$this->createPrinter(),$this->createQRPrinter());
     }
   
     public function createOrbitalModel(){
@@ -56,7 +56,7 @@ class Configuration{
 
     public function createDestinosController(){
         require_once("controller/DestinosController.php");
-        return new DestinosController($this->createDestinosModel(),$this->createPrinter());
+        return new DestinosController($this->createDomPDF(), $this->createDestinosModel(),$this->createPrinter(), $this->createQRPrinter());
     }
   
     public function createDestinosModel(){

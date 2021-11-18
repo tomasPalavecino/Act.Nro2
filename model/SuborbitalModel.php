@@ -67,8 +67,11 @@ class SuborbitalModel
     {
         $insert = "UPDATE reserva set idUsuario = '".$idUsuario."', estado = '".true."' where idReserva = '".$idReserva."'";
         $this->database->agregar($insert);
-
         return $this->obtenerTodaLaInformacionParaElPDF($idReserva);
+    }
+
+    public function confirmarReserva(){
+        
     }
 
     public function comprobarChequeoExistente($idUsuario){
@@ -100,5 +103,12 @@ class SuborbitalModel
          return $this->database->obtenerArrayRegistro($consulta);
     
 }
+
+    public function confirmarReservaPorPagoRealizado($idReserva){
+        $insert = "UPDATE reserva set confirmado = '".true."' where idReserva = '".$idReserva."'";
+        $this->database->agregar($insert);
+    }
+
+    
 
 }

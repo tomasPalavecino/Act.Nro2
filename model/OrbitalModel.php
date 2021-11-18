@@ -40,6 +40,8 @@ class OrbitalModel
     {
         $insert = "UPDATE reserva set idUsuario = '".$idUsuario."', estado = '".true."' where idReserva = '".$idReserva."'";
         $this->database->agregar($insert);
+        return $this->obtenerTodaLaInformacionParaElPDF($idReserva);
+
     }
 
     public function comprobarSiPuedeVolar($idUsuario, $idViaje)
@@ -99,5 +101,10 @@ class OrbitalModel
         inner join cabina on cabina.idCabina = aeronave.idCabina  where reserva.idReserva = '".$idReserva."'";
          return $this->database->obtenerArrayRegistro($consulta);
     
+}
+
+public function confirmarReservaPorPagoRealizado($idReserva){
+    $insert = "UPDATE reserva set confirmado = '".true."' where idReserva = '".$idReserva."'";
+    $this->database->agregar($insert);
 }
 }

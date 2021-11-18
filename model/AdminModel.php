@@ -71,10 +71,10 @@ class AdminModel
         return $this->database->obtenerArrayRegistro($consulta);
     }
 
-    public function registrarNuevoVuelo($fechaSalida,$fechaLlegada,$idSalida,$idDestino,$idAeronave){
+    public function registrarNuevoVuelo($fechaSalida,$fechaLlegada,$idSalida,$idDestino,$idAeronave, $valor){
         // me tiene que devolver la id del vuelo para despues crear las reservas vacias.
-        $insert = "INSERT into viaje (fechaSalida,fechaRegreso,idSalida, idDestino, idAeronave) 
-        values ('" . $fechaSalida . "', '" . $fechaLlegada . "', '".$idSalida."', '".$idDestino."', '".$idAeronave."')";
+        $insert = "INSERT into viaje (fechaSalida,fechaRegreso,idSalida, idDestino, idAeronave, precio) 
+        values ('" . $fechaSalida . "', '" . $fechaLlegada . "', '".$idSalida."', '".$idDestino."', '".$idAeronave."', '".$valor."')";
         $this->database->agregar($insert);
         
         $ultimoVueloRegistrado = "SELECT * FROM viaje ORDER BY idViaje DESC LIMIT 1"; //del insert anterior
@@ -82,7 +82,7 @@ class AdminModel
         
     }
 
-    public function crearReservasParaEseVuelo($idDelVuelo,$idAeronave){
+    public function crearReservasParaEseVuelo($idDelVuelo,$idAeronave, $precio){
         $consulta = "SELECT capacidad from aeronave where idAeronave = '".$idAeronave."'";
         $capacidadDeLaAeronave =  $this->database->obtenerArrayRegistro($consulta);
         $caracteresPermitidos = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -90,8 +90,8 @@ class AdminModel
         for ($i = 1 ; $i <= $capacidadDeLaAeronave["capacidad"]; $i++){
             $numeroAlfanumerico = substr(str_shuffle($caracteresPermitidos),0,8);
 
-            $reserva = "INSERT INTO reserva (idViaje, asiento, codigoAlfanumerico)
-            values ('".$idDelVuelo."' , '".$i."', '".$numeroAlfanumerico."')";
+            $reserva = "INSERT INTO reserva (idViaje, asiento, codigoAlfanumerico, precio)
+            values ('".$idDelVuelo."' , '".$i."', '".$numeroAlfanumerico."', '".$precio."')";
 
             $this->database->agregar($reserva);
         }

@@ -36,7 +36,6 @@ class ChequeoController
 
     function chequeo()
     {
-        //al momento de hacer el chequeo tiene que dar un pdf?
 
         if (isset($_SESSION["idUsuario"])) {
             $codigo = $this->codUsuario();

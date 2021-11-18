@@ -1,0 +1,65 @@
+{{>headerSession}}
+
+
+<h2 style="text-align: center; font-weight: bold;">Estado de tus reservas</h2>
+
+{{#vuelosPorConfirmar}}
+<div style="display: flex; width: 100%; justify-content: center">
+    <div class="card card-margin"
+        style="width: 60%; height: auto; margin: 20px">
+
+        <div class="card-body pt-0">
+            <div class="widget-49">
+                <div class="widget-49-title-wrapper">
+                    <div class="widget-49-date-primary">
+                        <span class="widget-49-date-month"><img src="/TPFINALPW2/public/img/cohete.png" alt="cohete" style="height: 50px; width: 50px;"></span>
+                    </div>
+                    <div class="widget-49-meeting-info">
+                        <span class="widget-49-pro-title">Nombre:
+                            nombre</span> <span
+                            class="widget-49-meeting-time">Codigo Alfa:
+                            {{codigoAlfanumerico}}</span>
+                    </div>
+                </div>
+                <ol class="widget-49-meeting-points">
+                    <li class="widget-49-meeting-item"><span>Tipo de Vuelo:
+                        {{tipoDeViaje}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Fecha de Salida:
+                        {{fechaSalida}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Fecha de Regreso:
+                        {{fechaRegreso}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Lugar de Salida:
+                        {{LugarSal}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Lugar de Destino:
+                        {{LugarDes}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Matricula:
+                        {{matricula}}</span></li> 
+                    <li class="widget-49-meeting-item"><span>Asiento:
+                        {{asiento}}</span></li>        
+                    <li class="widget-49-meeting-item"><span>Modelo:
+                        {{modelo}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Equipo:
+                        {{equipo}}</span></li>
+                    <li class="widget-49-meeting-item"><span>Cabina:
+                        {{cabina}}</span></li>
+                </ol>
+
+                {{#confirmado}}
+                <h2 style="color: green; text-align: center; font-weight: bolder;">Pago realizado</h2>
+              {{/confirmado}}
+              {{^confirmado}}
+              
+              <button type="button" class="btn btn-primary"><a href="/TPFINALPW2/{{tipoDeViaje}}/showFormPago?idReserva={{idReserva}}" style="color: honeydew; ">Seccion de pago</a></button>
+              {{/confirmado}}
+              
+
+            </div>
+        </div>
+    </div>
+</div>
+{{/vuelosPorConfirmar}}
+
+
+
+
+{{>footer}}

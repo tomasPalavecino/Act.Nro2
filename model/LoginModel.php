@@ -63,4 +63,16 @@ class LoginModel
         $usuario = $this->database->obtenerArrayRegistro($consulta);
         return $usuario;
     }
+
+    public function listarVuelosPendientesDePago($idUsuario){
+        $consulta = "SELECT * FROM reserva inner join viaje on viaje.idViaje = reserva.idViaje
+        inner join aeronave on viaje.idAeronave = aeronave.idAeronave
+        inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
+        on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
+        inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo 
+        inner join cabina on cabina.idCabina = aeronave.idCabina  where reserva.idUsuario = '".$idUsuario."'";   
+        return $this->database->query($consulta);
+
+        
+    }
 }

@@ -6,12 +6,16 @@ class OrbitalController
 
     private $modelOrbital;
     private $printer;
+    private $dompdf;
+    private $qr;
 
     //ver luego si requiero un model
-    public function __construct($modelOrbital, $printer)
+    public function __construct($dompdf, $modelOrbital, $printer, $qr)
     {
         $this->modelOrbital = $modelOrbital;
         $this->printer = $printer;
+        $this->dompdf = $dompdf;
+        $this->qr = $qr;
     }
 
     public function show()
@@ -92,7 +96,8 @@ class OrbitalController
         $email_mensaje .= "Viajara en cabina de tipo: " . $viaje["cabina"] . "\r\n";
         $email_mensaje .= "Su asiento sera el N- : " . $asiento . "\r\n";
         $email_mensaje .= "Su equipo sera: " . $viaje["equipo"] . "\r\n";
-        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Suborbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario&nRan=$nRan&idReserva=$idReserva";
+        $email_mensaje .= "Confirmar turno local http://localhost/TPFINALPW2/Orbital/reservar?idViaje=$idViaje&idUsuario=$idUsuario&nRan=$nRan&idReserva=$idReserva \r\n";
+        $email_mensaje .= "Se guardara su lugar, pero recuerde que no podra viajar hasta no tener el pago realizado";
 
         // destinatario//
         $emailTo = $_POST["email"];
@@ -120,11 +125,82 @@ class OrbitalController
             $idUsuario = $_GET["idUsuario"];
             $varSession = $_SESSION["nombreUsuario"];
             $model["nombreSession"] = $varSession;
-            $this->modelOrbital->reservarViaje($idUsuario, $idReserva);
-            $viaje = $this->modelSuborbital->reservarViaje($idUsuario, $idReserva);
-            $this->dompdf->render($viaje, $varSession);
+            $viaje = $this->modelOrbital->reservarViaje($idUsuario, $idReserva);
+            $tipo = "Orbital";
+            $this->dompdf->render($tipo,$viaje, $varSession, $this->qr);
         } else {
             echo "Ups ha ocurrido un error";
         }
     }
+
+    public function showFormPago()
+    {   
+        $idReserva = $_GET["idReserva"];
+
+        $comprobarSiYaPago = $this->modelOrbital->obtenerAsientoPorReserva($idReserva);
+
+       
+
+        if(isset($_SESSION["idUsuario"])){
+
+            if($comprobarSiYaPago["confirmado"] == true){
+                $model["nombreSession"] = $_SESSION["nombreUsuario"];
+                echo $this->printer->render("view/pagoRealizado.html", $model);
+                exit();
+            }
+
+        
+
+        $reserva = $this->modelOrbital->obtenerTodaLaInformacionParaElPDF($idReserva);
+        // SDK de Mercado Pago
+        require __DIR__ .  '/../vendor/autoload.php';
+        // Agrega credenciales
+        MercadoPago\SDK::setAccessToken('TEST-262736215767777-111621-1ac4ab10864719f8f5f2c61e9e77bd5e-183335380');
+        // Crea un objeto de preferencia
+        $preference = new MercadoPago\Preference();
+
+        // Crea un ítem en la preferencia
+        $item = new MercadoPago\Item();
+        $item->title = "Vuelo Orbital";
+        $item->description = $reserva["idReserva"];
+
+        $item->quantity = 1;
+        $item->unit_price = $reserva["precio"];
+        $preference->items = array($item);
+        $preference->save();
+
+        $preference->back_urls = array(
+            "success" => "http://localhost/TPFINALPW2/Orbital/confirmar"
+        );
+        $preference->auto_return = "approved";
+        $preference->payment_methods = array(
+          "excluded_payment_types" => array(
+            array("id" => "ticket")
+          )
+        );
+        $preference->save();
+      
+        $model["nombreSession"] = $_SESSION["nombreUsuario"];
+        $model["preference"] = $preference;
+        echo $this->printer->render("view/paginaDePago.html", $model);
+
+    }else{
+        header("Location: /TPFINALPW2/Login/show");
+ 
+    }
+
+}
+
+    public function confirmar(){
+
+       $idPago = $_GET["collection_id"];
+       $HOLA = json_decode(file_get_contents("https://api.mercadopago.com/v1/payments/$idPago?access_token=TEST-262736215767777-111621-1ac4ab10864719f8f5f2c61e9e77bd5e-183335380")); 
+       $idReserva = intval($HOLA->additional_info->items[0]->description); //recupero del Json la info de la reserva
+        
+
+        $this->modelOrbital->confirmarReservaPorPagoRealizado($idReserva);
+        $model["nombreSession"] = $_SESSION["nombreUsuario"];
+        echo $this->printer->render("view/confirmacionReservaExito.html", $model);
+
+        }
 }

@@ -9,7 +9,7 @@ class RegistroModel
         $this->database = $database;
     }
 
-    public function registrar($nombreUsuarioPOST, $clavePost, $repiteClavePost)
+    public function comprobarDatos($nombreUsuarioPOST, $clavePost, $repiteClavePost)
     {
         $mensajeClaveRepetida = "Las claves deben ser iguales";
         $mensajeClaveCorta = "La clave debe tener mas de 8 caracteres";
@@ -28,9 +28,13 @@ class RegistroModel
             return $mensajeUsuarioRepetido;
         }
 
-        $query = "insert into Usuario (nombreDeUsuario, contrasenia) values ('" . $nombreUsuarioPOST . "', '" . $clavePost . "')";
+        
+    }
+
+    public function registrar($nombreUsuario, $clave){
+        $query = "insert into Usuario (nombreDeUsuario, contrasenia) values ('" . $nombreUsuario . "', '" . $clave . "')";
         $this->database->agregar($query);
-        return $nombreUsuarioPOST;
+        return $nombreUsuario;
     }
 
 

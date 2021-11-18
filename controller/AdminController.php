@@ -44,14 +44,15 @@ class AdminController
             $idAeronave = $_POST["aeronave"];
             $fechaSalida = $_POST["FSal"];
             $fechaLlegada = $_POST["FLlegada"];
+            $precio = $_POST["valor"];
 
             $resultado = $this->modelAdmin->validarViaje($idDestino, $idAeronave);
 
             if ($resultado == true) {
 
-                $vueloRegistrado =  $this->modelAdmin->registrarNuevoVuelo($fechaSalida, $fechaLlegada, $idSalida, $idDestino, $idAeronave);
+                $vueloRegistrado =  $this->modelAdmin->registrarNuevoVuelo($fechaSalida, $fechaLlegada, $idSalida, $idDestino, $idAeronave, $precio);
                 $idDelVuelo = $vueloRegistrado["idViaje"];
-                $this->modelAdmin->crearReservasParaEseVuelo($idDelVuelo, $idAeronave);
+                $this->modelAdmin->crearReservasParaEseVuelo($idDelVuelo, $idAeronave, $precio);
 
                 $model["mensaje"] = "Vuelo registrado con exito";
                 echo $this->printer->render("view/resultadoRegistroVuelo.html", $model);

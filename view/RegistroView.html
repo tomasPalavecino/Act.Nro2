@@ -2,7 +2,7 @@
 <div class="contenedorRegistro" style="display:flex; justify-content:center; padding:25px;">
 <div class="cuadro-login wow animate__animated animate__backInLeft ">
                 <h3>Registro</h3>
-                <form action="/TPFINALPW2/registro/registrar" method="POST">
+                <form action="/TPFINALPW2/registro/enviarMailDeConfirmacion" method="POST">
                     <div class="txt-info">
                         <input type="text" name="NombreUsuario" id="nombreUsuario" required>
                         <span></span>
@@ -18,6 +18,12 @@
                         <input type="password" name="claveRepetida" id="claveRepetida" required>
                         <span></span>
                         <label>Repetir contraseña</label>
+                    </div>
+
+                    <div class="txt-info">
+                        <input type="text" name="email" id="email" required>
+                        <span></span>
+                        <label>Email para confirmacion</label>
                     </div>
 
                     <input type="submit" value="Registrarse">

@@ -60,4 +60,15 @@ class LoginController{
         }
     }
 
+    public function listaDeVuelosPendientesDePago(){
+       $idUsuario = $_SESSION["idUsuario"];
+
+       $registrosDeVuelosPorConfirmar = $this->loginModel->listarVuelosPendientesDePago($idUsuario);
+
+       $model["vuelosPorConfirmar"] = $registrosDeVuelosPorConfirmar;
+       $model["nombreSession"] = $_SESSION["nombreUsuario"];
+       
+       echo $this->printer->render("view/vuelosPorConfirmar.html", $model);
+    }
+
 }

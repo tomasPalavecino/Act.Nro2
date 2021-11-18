@@ -1,0 +1,19 @@
+{{>headerSession}}
+
+<div style="display: flex; justify-content: center;">
+
+<div style="width: 70%; height: 200px; background-color: aliceblue; border-radius: 20px; margin-top: 20px; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+  
+  <h2 style="color: rgb(109, 2, 2); font-weight: bold; text-align: center;">A continuacion presione el boton para realizar el pago con su tarjeta de Credito</h2>
+  
+
+  <div style="display: flex; justify-content: center;">
+<script
+  src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+  data-preference-id="{{preference.id}}">
+</script>
+</div>
+</div>
+</div>
+
+{{>footer}}
