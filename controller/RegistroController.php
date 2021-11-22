@@ -37,7 +37,7 @@ class RegistroController
             //este es el caso de error
         } else {
 
-            $emailSubject = "Confirmacion de reserva Gaucho Rocket";
+            $emailSubject = "Confirmacion de registro de Usuario";
             $email_mensaje = "Confirmar Registro de Usuario http://localhost/TPFINALPW2/Registro/registrarse?usuario=$nombreUsuario";
 
             // destinatario //

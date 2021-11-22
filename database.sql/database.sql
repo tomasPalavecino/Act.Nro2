@@ -89,7 +89,7 @@ constraint fkaYsuario foreign key (idUsuario) references usuario (idUsuario)
 );
 
 insert into Usuario (nombreDeUsuario , contrasenia, tipoDeUsuario)
-values ("admin", "123456789", 1),("cris", "123456789", 0);
+values ("admin", "123456789", 1);
 
 insert into cabina (cabina)
 value("General"),("Familiar"),("Suite");
@@ -124,5 +124,7 @@ de forma dinamica se van a crear registros por la cantidad de disponibilidad de 
 elegir que lugar ocupar, ese lugar o mas bien, esa reserva va a quedar con estado ocupado*/
 
 /*LOS VUELOS ORBITALES NO TIENEN DESTINO Y SALIDA (PORQUE ESO ES PARA ENTRE DESTINOS)*/
-
-
+select * from chequeomedico;
+select * from usuario;
+delete from chequeomedico;
+select * from reserva;

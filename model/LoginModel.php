@@ -47,13 +47,15 @@ class LoginModel
 
 
 
-        if ($usuarioComun) { //compruebo si devolvio algo.
+        if  ($usuarioComun) { //compruebo si devolvio algo.
             return 0; //este me va a dirigir a la pagina de usuarioComun
         } else if ($usuarioAdmin) {
             return 1; //me va a dirigir a la pagina de admin
-        } else {
-            return -1; //me va a tirar un error de UsuarioInexistente.
+        } else{
+            return 2; //me va a tirar un error de UsuarioInexistente.
+
         }
+        
     }
 
     public function obtenerUsuarioPorId($nombreUsuario, $clave)  {

@@ -26,7 +26,7 @@ class LoginController{
             $this->showPaginaPrincipal();
         
        }else {
-        echo $this->printer->render("view/LoginView.html");
+        header("Location: /TPFINALPW2/Login/show");
 
        }
 
@@ -34,7 +34,7 @@ class LoginController{
 
     function showPaginaPrincipal(){
 
-        if(isset($_SESSION["idUsuario"])){
+        if(isset($_SESSION["tipoDeUsuario"]) || isset($_SESSION["idUsuario"])){
 
         
         if ($_SESSION["tipoDeUsuario"] == 0){
@@ -48,27 +48,37 @@ class LoginController{
     
            }
 
-           if ($_SESSION["tipoDeUsuario"] == -1){
+           if ($_SESSION["tipoDeUsuario"] == 2){
+               
             session_destroy();
             $mensaje = "Usuario Inexistente";
-            $model = array( "error" => $mensaje);
+            $model = array("error" => $mensaje);
             echo $this->printer->render("view/LoginView.html", $model);
+            exit();
            }
         }else{
-            echo $this->printer->render("view/LoginView.html");
+            header("Location: /TPFINALPW2/Login/show");
 
         }
     }
 
     public function listaDeVuelosPendientesDePago(){
-       $idUsuario = $_SESSION["idUsuario"];
 
-       $registrosDeVuelosPorConfirmar = $this->loginModel->listarVuelosPendientesDePago($idUsuario);
+        if(isset($_SESSION["idUsuario"])){
 
-       $model["vuelosPorConfirmar"] = $registrosDeVuelosPorConfirmar;
-       $model["nombreSession"] = $_SESSION["nombreUsuario"];
-       
-       echo $this->printer->render("view/vuelosPorConfirmar.html", $model);
+        
+            $idUsuario = $_SESSION["idUsuario"];
+
+            $registrosDeVuelosPorConfirmar = $this->loginModel->listarVuelosPendientesDePago($idUsuario);
+     
+            $model["vuelosPorConfirmar"] = $registrosDeVuelosPorConfirmar;
+            $model["nombreSession"] = $_SESSION["nombreUsuario"];
+            
+            echo $this->printer->render("view/vuelosPorConfirmar.html", $model);  
+        }else{
+            header("Location: /TPFINALPW2/Login/show");
+        }
+ 
     }
 
 }

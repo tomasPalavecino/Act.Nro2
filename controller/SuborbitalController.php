@@ -136,14 +136,9 @@ class SuborbitalController
         }
     }
 
-    public function showFormPago()
-    {   
+    public function showFormPago(){   
         $idReserva = $_GET["idReserva"];
-
         $comprobarSiYaPago = $this->modelSuborbital->obtenerAsientoPorReserva($idReserva);
-
-       
-
         if(isset($_SESSION["idUsuario"])){
 
             if($comprobarSiYaPago["confirmado"] == true){
@@ -153,24 +148,26 @@ class SuborbitalController
             }
 
         $reserva = $this->modelSuborbital->obtenerTodaLaInformacionParaElPDF($idReserva);
+        //aca arranca lo de Mercado Pago, el codigo es tal cual esta en la pagina
         // SDK de Mercado Pago
         require __DIR__ .  '/../vendor/autoload.php';
-        // Agrega credenciales
+        // Agrega tus credenciales
         MercadoPago\SDK::setAccessToken('TEST-262736215767777-111621-1ac4ab10864719f8f5f2c61e9e77bd5e-183335380');
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
 
-        // Crea un ítem en la preferencia
+        // Crea un ítem en la preferencia (la info del pago)
         $item = new MercadoPago\Item();
-        $item->title = "Vuelo suborbital";
+        $item->title = "Vuelo suborbital"; //titulo
         $item->description = $reserva["idReserva"];
 
         $item->quantity = 1;
         $item->unit_price = $reserva["precio"];
-        $preference->items = array($item);
-        $preference->save();
+        $preference->items = array($item);//guardas en la preferencia el item
+        $preference->save(); //guardas
 
-        $preference->back_urls = array(
+        $preference->back_urls = array(//cuando pones "volver al sitio" te manda a esta url
+                                        // y podes obtener por get la ID del pago para consultar en la api
             "success" => "http://localhost/TPFINALPW2/Suborbital/confirmar"
         );
         $preference->auto_return = "approved";
@@ -182,8 +179,8 @@ class SuborbitalController
         $preference->save();
       
         $model["nombreSession"] = $_SESSION["nombreUsuario"];
-        $model["preference"] = $preference;
-        echo $this->printer->render("view/paginaDePago.html", $model);
+        $model["preference"] = $preference;//guardas la preferencia en un model
+        echo $this->printer->render("view/paginaDePago.html", $model);//le mandas a la vista el objeto
 
     }else{
         header("Location: /TPFINALPW2/Login/show");

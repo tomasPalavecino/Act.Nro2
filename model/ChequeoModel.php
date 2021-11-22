@@ -31,7 +31,7 @@ value ('" . $codigo . "','" . $idUsuario . "')";
     public function comprobarChequeoExistente($idUsuario){
         $consulta = "SELECT * FROM chequeomedico where idUsuario like '".$idUsuario."'";
 
-        $existe =  $this->database->consultarSiExisteRegistro($consulta);
-        return $existe;
+        return $this->database->obtenerArrayRegistro($consulta);
+       
     }
 }

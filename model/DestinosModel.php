@@ -17,7 +17,7 @@ class DestinosModel
         inner join tipodeviaje on aeronave.idTipoDeViaje = tipodeviaje.idTipoDeViaje inner join salida
         on viaje.idSalida = salida.idSalida inner join destino on viaje.idDestino = destino.idDestino
         inner join equipo on equipo.idEquipo = aeronave.idEquipo inner join modelo on modelo.idModelo = aeronave.idModelo
-        where tipodeviaje.tipoDeViaje like 'Entre destinos'"; //cambiar esta consulta
+        where tipodeviaje.tipoDeViaje like 'Destinos'"; //cambiar esta consulta
         $resultado = $this->database->query($consulta); //me devuelve un array
         return $resultado;
     }

@@ -44,17 +44,19 @@ class ChequeoController
             $varSession = $_SESSION["nombreUsuario"];
             $model["nombreSession"] = $varSession;
 
-            $existe = $this->modelo->comprobarChequeoExistente($idUsuario);
+            $registroChequeo = $this->modelo->comprobarChequeoExistente($idUsuario);
 
-            if ($existe == true) {
-                $varSession = $_SESSION["nombreUsuario"];
+
+            if ($registroChequeo != null) {
                 $model["error"] = "Usted ya cuenta con un chequeo medico realizado anteriormente 
-            Contactese con su proveedor de servicios para que se le permita registrar otra visita medica";
-                $model["nombreSession"] = $varSession;
-
+                Contactese con su proveedor de servicios para que se le permita registrar 
+                otra visita medica. Su chequeo es del tipo: ".$registroChequeo['tipoDeCliente'];
                 echo $this->printer->render("view/formMedic.html", $model);
+
             } else {
                 $this->modelo->registrarChequeo($idUsuario, $codigo);
+                $registroChequeo = $this->modelo->comprobarChequeoExistente($idUsuario);
+                $model["tipoDeCliente"] = $registroChequeo["tipoDeCliente"];
                 echo $this->printer->render("view/chequeoExitoso.html", $model);
             }
         } else {
