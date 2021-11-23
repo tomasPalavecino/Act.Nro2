@@ -140,7 +140,7 @@ class DestinosController
     {   
         $idReserva = $_GET["idReserva"];
 
-        $comprobarSiYaPago = $this->modelSuborbital->obtenerAsientoPorReserva($idReserva);
+        $comprobarSiYaPago = $this->modelEntreDestinos->obtenerAsientoPorReserva($idReserva);
 
        
 
@@ -163,7 +163,7 @@ class DestinosController
 
         // Crea un ítem en la preferencia
         $item = new MercadoPago\Item();
-        $item->title = "Vuelo suborbital";
+        $item->title = "Destinos";
         $item->description = $reserva["idReserva"];
 
         $item->quantity = 1;

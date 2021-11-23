@@ -39,10 +39,10 @@ class SuborbitalModel
     {
         // si no tiene un chequeo, no puede seguir. y validar su tipo con el viaje que quiere hacer
         // el viaje lo necesito para acceder al equipo.
-        $consultarTipoDeUsuario = "SELECT * FROM usuario inner join chequeoMedico 
+        $consultarUsuario = "SELECT * FROM usuario inner join chequeoMedico 
         on usuario.idUsuario = chequeoMedico.idUsuario where usuario.idUsuario = '" . $idUsuario . "'";
 
-        $arrayUsuario = $this->database->obtenerArrayRegistro($consultarTipoDeUsuario);
+        $arrayUsuario = $this->database->obtenerArrayRegistro($consultarUsuario);
 
         $tipoDeUsuario = $arrayUsuario["tipoDeCliente"]; //2
 

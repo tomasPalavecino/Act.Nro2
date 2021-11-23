@@ -192,8 +192,8 @@ class SuborbitalController
     public function confirmar(){
 
        $idPago = $_GET["collection_id"];
-       $HOLA = json_decode(file_get_contents("https://api.mercadopago.com/v1/payments/$idPago?access_token=TEST-262736215767777-111621-1ac4ab10864719f8f5f2c61e9e77bd5e-183335380")); 
-       $idReserva = intval($HOLA->additional_info->items[0]->description); //recupero del Json la info de la reserva
+       $jsonInfo = json_decode(file_get_contents("https://api.mercadopago.com/v1/payments/$idPago?access_token=TEST-262736215767777-111621-1ac4ab10864719f8f5f2c61e9e77bd5e-183335380")); 
+       $idReserva = intval($jsonInfo->additional_info->items[0]->description); //recupero del Json la info de la reserva
         
 
         $this->modelSuborbital->confirmarReservaPorPagoRealizado($idReserva);
