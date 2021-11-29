@@ -116,6 +116,8 @@ insert into destino (LugarDes)
 value ("Estación Espacial Internacional"),("OrbiterHotel"),("Luna"),("Marte"),
 ("Ganimedes"),("Europa"),("Encedalo"),("Titán");
 
+select * from chequeomedico inner join usuario on chequeomedico.idUsuario = usuario.idUsuario;
+
 /*RECORDAR QUE SOLO EL VIAJE ENTRE DESTINOS TIENE SALIDA Y DESTINO. LOS OTROS SON SOLO SUBORBITALES Y ORBITALES*/
 
 
@@ -124,7 +126,3 @@ de forma dinamica se van a crear registros por la cantidad de disponibilidad de 
 elegir que lugar ocupar, ese lugar o mas bien, esa reserva va a quedar con estado ocupado*/
 
 /*LOS VUELOS ORBITALES NO TIENEN DESTINO Y SALIDA (PORQUE ESO ES PARA ENTRE DESTINOS)*/
-select * from chequeomedico;
-select * from usuario;
-delete from chequeomedico;
-select * from reserva;
